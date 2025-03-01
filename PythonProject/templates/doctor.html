@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Doctor Interface</h1>
+    <h2>Patients:</h2>
+    <ul>
+        {% for patient in patients %}
+            <li>
+                <strong>{{ patient.name }}</strong> (Age: {{ patient.age }}, Sex: {{ patient.sex }})
+                <form method="POST" style="display:inline;">
+                    <input type="hidden" name="patient_id" value="{{ patient.id }}">
+                    <label for="diagnosis">Diagnosis:</label>
+                    <input type="text" id="diagnosis" name="diagnosis" required>
+                    <label for="prescription">Prescription:</label>
+                    <input type="text" id="prescription" name="prescription" required>
+                    <button type="submit">Update</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
