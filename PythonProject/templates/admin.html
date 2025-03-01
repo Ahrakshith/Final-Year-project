@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Admin Interface</h1>
+    <h2>Patients:</h2>
+    <ul>
+        {% for patient in patients %}
+            <li>
+                <strong>{{ patient.name }}</strong> (Age: {{ patient.age }}, Sex: {{ patient.sex }})
+                <p>Diagnosis: {{ patient.diagnosis }}</p>
+                <p>Prescription: {{ patient.prescription }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    <h2>Audit Logs:</h2>
+    <ul>
+        {% for log in logs %}
+            <li>
+                <strong>{{ log.username }}</strong> performed {{ log.action }} on patient {{ log.patient_id }} at {{ log.timestamp }}.
+                <p>Details: {{ log.details }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
