@@ -6,3 +6,7 @@ google-auth>=2.14.1,<3.0.0dev
 vosk==0.3.44
 pydub==0.25.1
 requests==2.31.0
+flask-socketio==5.3.6
+speechrecognition==3.10.0
+Werkzeug==2.3.7
+pymongo==4.5.0

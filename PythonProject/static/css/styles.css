@@ -1,14 +1,29 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
-h1 {
-    color: #333;
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 form {
-    margin-bottom: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 label {
@@ -18,9 +33,11 @@ label {
 
 input, select, button {
     margin-top: 5px;
-    padding: 5px;
+    padding: 10px;
     width: 100%;
     max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 button {
@@ -34,11 +51,52 @@ button:hover {
     background-color: #0056b3;
 }
 
-a {
-    color: #007bff;
-    text-decoration: none;
+/* Table Styles */
+.prescription-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-a:hover {
-    text-decoration: underline;
+.prescription-table th, .prescription-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.prescription-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.prescription-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.prescription-table button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.prescription-table button:hover {
+    background-color: #218838;
+}
+
+.prescription-table .delete-button {
+    background-color: #dc3545;
+}
+
+.prescription-table .delete-button:hover {
+    background-color: #c82333;
+}
+
+#validation-result {
+    margin-top: 10px;
+    font-weight: bold;
 }

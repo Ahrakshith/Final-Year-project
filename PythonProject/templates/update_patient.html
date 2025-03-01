@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Patient</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Update Patient: {{ patient.name }}</h1>
+    </header>
+
+    <section class="container">
+        <form method="POST">
+            <label for="diagnosis">Diagnosis:</label>
+            <input type="text" id="diagnosis" name="diagnosis" value="{{ patient.diagnosis }}" required>
+            <br>
+
+            <!-- Medicine and Duration Input -->
+            <div id="medicine-container">
+                <div class="medicine-entry">
+                    <label for="medicine1">Medicine 1:</label>
+                    <input type="text" id="medicine1" name="medicine1" placeholder="Enter medicine name" required>
+                    <label for="duration1">Duration:</label>
+                    <input type="text" id="duration1" name="duration1" placeholder="e.g., once daily for 7 days" required>
+                </div>
+            </div>
+
+            <!-- Add More Medicine Button -->
+            <button type="button" onclick="addMedicineField()">Add More Medicine</button>
+            <br>
+
+            <button type="submit">Update</button>
+        </form>
+        <a href="{{ url_for('doctor_side') }}">Back to Doctor Interface</a>
+    </section>
+
+    <script>
+        let medicineCount = 1;
+
+        function addMedicineField() {
+            medicineCount++;
+            const container = document.getElementById('medicine-container');
+            const newEntry = document.createElement('div');
+            newEntry.className = 'medicine-entry';
+            newEntry.innerHTML = `
+                <label for="medicine${medicineCount}">Medicine ${medicineCount}:</label>
+                <input type="text" id="medicine${medicineCount}" name="medicine${medicineCount}" placeholder="Enter medicine name" required>
+                <label for="duration${medicineCount}">Duration:</label>
+                <input type="text" id="duration${medicineCount}" name="duration${medicineCount}" placeholder="e.g., once daily for 7 days" required>
+            `;
+            container.appendChild(newEntry);
+        }
+    </script>
+</body>
+</html>
