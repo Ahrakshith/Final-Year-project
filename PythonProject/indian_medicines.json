@@ -1,0 +1,20 @@
+[
+  {
+    "brand_name": "Crocin",
+    "generic_name": "Paracetamol",
+    "indications": ["Fever", "Pain"],
+    "dosage_form": "Tablet"
+  },
+  {
+    "brand_name": "Combiflam",
+    "generic_name": "Ibuprofen + Paracetamol",
+    "indications": ["Pain", "Inflammation"],
+    "dosage_form": "Tablet"
+  },
+  {
+    "brand_name": "Azithral",
+    "generic_name": "Azithromycin",
+    "indications": ["Bacterial Infections"],
+    "dosage_form": "Tablet"
+  }
+]

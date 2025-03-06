@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Indian Medicines</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Manage Indian Medicines</h1>
+    </header>
+
+    <section class="container">
+        <!-- Add Medicine Form -->
+        <article>
+            <h2>Add New Medicine</h2>
+            <form id="addMedicineForm">
+                <label for="brand_name">Brand Name:</label>
+                <input type="text" id="brand_name" name="brand_name" required>
+                <br>
+                <label for="generic_name">Generic Name:</label>
+                <input type="text" id="generic_name" name="generic_name" required>
+                <br>
+                <label for="indications">Indications (comma-separated):</label>
+                <input type="text" id="indications" name="indications" required>
+                <br>
+                <label for="dosage_form">Dosage Form:</label>
+                <input type="text" id="dosage_form" name="dosage_form" required>
+                <br>
+                <button type="submit">Add Medicine</button>
+            </form>
+            <div id="addMedicineResult"></div>
+        </article>
+
+        <!-- List Medicines -->
+        <article>
+            <h2>List of Medicines</h2>
+            <table id="medicineTable">
+                <thead>
+                    <tr>
+                        <th>Brand Name</th>
+                        <th>Generic Name</th>
+                        <th>Indications</th>
+                        <th>Dosage Form</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Medicines will be populated here -->
+                </tbody>
+            </table>
+        </article>
+    </section>
+
+    <script>
+        // Fetch and display medicines
+        function fetchMedicines() {
+            fetch('/get_medicines')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#medicineTable tbody');
+                    tableBody.innerHTML = '';
+                    data.forEach(medicine => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${medicine.brand_name}</td>
+                            <td>${medicine.generic_name}</td>
+                            <td>${medicine.indications.join(', ')}</td>
+                            <td>${medicine.dosage_form}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                });
+        }
+
+        // Add new medicine
+        document.getElementById('addMedicineForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const medicine = {
+                brand_name: formData.get('brand_name'),
+                generic_name: formData.get('generic_name'),
+                indications: formData.get('indications').split(',').map(s => s.trim()),
+                dosage_form: formData.get('dosage_form')
+            };
+
+            fetch('/add_medicine', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(medicine),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('addMedicineResult').textContent = data.message;
+                fetchMedicines(); // Refresh the list
+            });
+        });
+
+        // Fetch medicines on page load
+        fetchMedicines();
+    </script>
+</body>
+</html>
